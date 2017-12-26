@@ -12,8 +12,14 @@ public class Car {
 		this.price = price;
 	}
 	
+	public void setPrice(double price) {
+		this.price = price;
+	}
 	
-	
+	public void setMaxSpeed(int maxSpeed) {
+		this.maxSpeed = maxSpeed;
+	}
+
 	public Car(String brand, String crop, int maxSpeed) {
 		super();
 		this.brand = brand;
