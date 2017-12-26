@@ -16,6 +16,8 @@ public class Main {
 		
 		DataSource dataSource = (DataSource) ctx.getBean("dataSource");
 		System.out.println(dataSource);
+		
+		System.out.println("Hello,Spring!");
 	}
 
 }
