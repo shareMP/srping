@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 自动装配 -->
+	<!-- 地址bean -->
+	<bean id="address2" class="com.mrl.spring.beans.autowire.Adress"
+		p:city="ZhangJiaGang" p:street="NanQiao"></bean>
+	<!-- car bean -->
+	<bean id="car" class="com.mrl.spring.beans.autowire.Car" p:brand="Audi" p:price="200000"></bean>
+	<!-- person bean -->
+	<!--
+		 可以使用autowire属性指定自动装配的方式 
+		byName:根据bean的名字和当前bean的setter风格的属性名进行自动装配   有匹配的则装配，否则为null ，例子：bean id="test" 当前bean必须要有setTest方法,
+	 	byType:根据bean的类型和当前bean的属性的类型进行自动装配,byType如果有多个bean都是一个类型的，则装配失败，报错。需要唯一
+	 	
+	 -->
+	<bean id="person" class="com.mrl.spring.beans.autowire.Person" p:name="MRL" autowire="byType"></bean>
+	
+	
+
+</beans>
