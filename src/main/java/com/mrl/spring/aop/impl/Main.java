@@ -11,7 +11,7 @@ public class Main {
 //		int res = arithmeticCalculator.add(1, 2);
 //		System.out.println(res);
 		
-		int res2 = arithmeticCalculator.div(4, 0);
+		int res2 = arithmeticCalculator.div(4, 2);
 		System.out.println(res2);
 		
 	/*	int res3 = arithmeticCalculator.mul(4, 2);

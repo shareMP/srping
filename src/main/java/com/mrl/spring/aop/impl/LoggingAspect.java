@@ -11,6 +11,7 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,8 +24,14 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class LoggingAspect {
 	
-	/*//声明前置通知
-	@Before(value = "execution(public int com.mrl.spring.aop.impl.ArithmeticCalculator.*(int,int))")
+	//定义一个方法
+	//声明切入点表达式,不需要加入其它的代码
+	@Pointcut("execution(public int com.mrl.spring.aop.impl.ArithmeticCalculator.*(int,int))")
+	public void declareJoinPointExpression(){}
+	
+	
+	//声明前置通知
+	@Before(value = "declareJoinPointExpression()")
 	public void beforeMethod(JoinPoint joinPoint){
 		String methodName = joinPoint.getSignature().getName();
 		List<Object> params = Arrays.asList(joinPoint.getArgs()); 
@@ -33,7 +40,7 @@ public class LoggingAspect {
 	
 	//后置通知,在目标方法执行后执行的通知,无论是否发生异常
 	//在后置通知中还不能访问目标方法执行的结果
-	@After("execution(public int com.mrl.spring.aop.impl.ArithmeticCalculator.*(int,int))")
+	@After("declareJoinPointExpression()")
 	public void afterMethod(JoinPoint point){
 		String methodName = point.getSignature().getName();
 		System.out.println("the method "+methodName+" end with ");
@@ -56,7 +63,8 @@ public class LoggingAspect {
 		String methodName = joinPoint.getSignature().getName();
 		System.out.println("the method "+methodName+" occcurs "+ex.toString());
 	}
-	*/
+	
+	
 	//环绕通知
 	//环绕通知需要携带 ProceedingJoinPoint餐参数 
 	//环绕通知类似于动态代理的全过程
