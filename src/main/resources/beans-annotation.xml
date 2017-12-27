@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+	<!-- 指定spring IOC容器扫描的包 resource-pattern:指定扫描的资源 <context:component-scan 
+		base-package="com.mrl.spring.beans.annotation" resource-pattern="repository/*.class"></context:component-scan> -->
+
+	<!-- 指定spring IOC容器扫描的包 
+		context:include-filter 子节点指定包含哪些子节点 的表达式的组件，改子节点需要与use-default-filters配合使用 	use-default-filters="false"
+	-->
+	<context:component-scan base-package="com.mrl.spring.beans.annotation">
+		<!-- context:exclude-filter  不包含  排除-->
+		<!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/> -->
+		<!-- <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/> -->
+	<!-- 	<context:exclude-filter type="assignable" expression="com.mrl.spring.beans.annotation.repository.UserRepository"/> -->
+		<!-- 	<context:include-filter type="assignable" expression="com.mrl.spring.beans.annotation.repository.UserRepository"/> -->
+	</context:component-scan>
+	
+	
+	
+
+</beans>
