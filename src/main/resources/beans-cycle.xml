@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	
+	<!-- 测试bean的声明周期 -->
+	<bean id="car" class="com.mrl.spring.beans.cycle.Car" init-method="init" destroy-method="destroy">
+		<property name="brand" value="Audi"></property>
+	</bean>
+	
+	<!-- bean的后置处理器 
+		实现BeanPostProcessor接口，并具体提供两个方法的实现
+		public Object postProcessBeforeInitialization(Object bean, String beanName)  init-method之前被调用
+		public Object postProcessAfterInitialization(Object bean, String beanName) init-method之后被调用
+		bean :bean实例本身
+		beanName:IOC容器配置的bean的名字
+		返回值：返回给用户的bean，可以修改返回新的bean
+		配置：不需要id，容器会自动识别,也可以配置id
+	-->
+	<bean class="com.mrl.spring.beans.cycle.MyBeanPostProcessor"></bean>
+
+</beans>
