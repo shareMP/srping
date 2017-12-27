@@ -136,4 +136,12 @@
 	<!-- p命名空间 ,简化配置,导入p命名空间-->
 	<bean id="person5" class="com.mrl.spring.beans.collection.Person" p:name="哈哈" p:gender="Man" p:cars-ref="cars"></bean>
 	
+	<!-- 自动装配 -->
+	
 </beans>
+
+
+
+
+
+
