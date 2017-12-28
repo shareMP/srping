@@ -2,6 +2,7 @@ package com.mrl.spring.jdbc;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 public class JdbcTest {
 
@@ -22,10 +26,13 @@ public class JdbcTest {
 	
 	private AccountDao dao = null;
 	
+	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+	
 	{
 		ctx = new ClassPathXmlApplicationContext("jdbc/applicationContext.xml");
 		jdbcTemplate = (JdbcTemplate) ctx.getBean("jdbcTemplate");
 		dao = ctx.getBean(AccountDao.class);
+		namedParameterJdbcTemplate = ctx.getBean(NamedParameterJdbcTemplate.class);
 	}
 	
 	@Test  //Insert Update Delete
@@ -101,5 +108,32 @@ public class JdbcTest {
 		System.out.println(account);
 	}
 	
-
+	/**
+	 * 可以为参数起名字,便于维护
+	 * 比较麻烦,map
+	 * 
+	 */
+	@Test
+	public void testNamedParameterJdbcTemplate(){
+		String sql = "INSERT INTO account(id,name,money) VALUES(:id,:name,:money)";
+		Map<String,Object> map = new HashMap<>();
+		map.put("id", 11);
+		map.put("name", "小小小");
+		map.put("money", 20000);
+		namedParameterJdbcTemplate.update(sql,map);
+	}
+	
+	/**
+	 * 参数名要和属性一致
+	 */
+	@Test
+	public void testNamedParameterJdbcTemplate2(){
+		String sql = "INSERT INTO account(id,name,money) VALUES(:id,:name,:money)";
+		Account account = new Account();
+		account.setId(12);
+		account.setName("测试");
+		account.setMoney("111");
+		SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(account);
+		namedParameterJdbcTemplate.update(sql,parameterSource);
+	}
 }
