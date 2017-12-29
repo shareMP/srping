@@ -26,5 +26,10 @@ public class CarFactoryBean implements FactoryBean<Car>{
 	public Class<?> getObjectType() {
 		return Car.class;
 	}
+
+	@Override
+	public boolean isSingleton() {
+		return true;
+	}
 	
 }
